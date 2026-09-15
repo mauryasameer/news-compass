@@ -1,0 +1,9 @@
+services:
+  news-compass:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./src/data:/home/app/news-compass/src/data
+      - ./reports:/home/app/news-compass/reports

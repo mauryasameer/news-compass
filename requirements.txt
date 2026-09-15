@@ -1,0 +1,4 @@
+meerax[llm]==1.10.3
+scikit-learn>=1.5
+gensim>=4.3
+scipy>=1.14
