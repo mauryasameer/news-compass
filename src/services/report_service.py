@@ -32,7 +32,11 @@ def build_report(
     eval_result: EvalResult | None = None,
 ) -> ReportBuilder:
     timestamp = datetime.now(UTC).isoformat(timespec="seconds")
-    report = ReportBuilder(title, subtitle=GOVERNANCE_BANNER)
+    # ReportBuilder.to_html() does not escape the report title itself (only section
+    # content is escaped by callers) — every call site here passes a hardcoded literal
+    # today, but escape defensively so this stays safe if title is ever wired to
+    # data-derived input later.
+    report = ReportBuilder(html.escape(title), subtitle=GOVERNANCE_BANNER)
 
     for rec in recommendations:
         narrative = narratives.get(rec["item_id"], "")
