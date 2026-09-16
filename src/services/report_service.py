@@ -50,10 +50,16 @@ def build_report(
         )
 
     if eval_result is not None:
+        rmse_caveat = (
+            "Note: RMSE compares imputed-rating scale against raw provider-score scale — "
+            "it is not a normalized prediction-error metric. Treat it as a rough magnitude "
+            "indicator only, and do not compare it across strategies with different score "
+            "scales."
+        )
         report.add_section(
             ReportSection(
                 title="Evaluation",
-                content="",
+                content=html.escape(rmse_caveat),
                 metrics={
                     **eval_result.recommender_metrics.to_dict(),
                     "rmse": eval_result.rmse,
