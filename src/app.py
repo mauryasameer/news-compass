@@ -36,13 +36,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--eval", action="store_true", help="run full evaluation and include it in the report")
     args = parser.parse_args(argv)
 
+    if args.top_k <= 0:
+        print(f"error: --top-k must be positive, got {args.top_k}", file=sys.stderr)
+        return 1
+
     try:
         data = load_interactions(args.consumer_csv, args.content_csv)
     except FileNotFoundError as exc:
         print(f"error: could not read data file: {exc}", file=sys.stderr)
         return 1
 
-    provider = build_provider(args.strategy, args.hybrid)
+    try:
+        provider = build_provider(args.strategy, args.hybrid)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     provider.fit(data.ratings)
 
     if args.strategy == "content" and args.seed_title:
