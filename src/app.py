@@ -8,6 +8,7 @@ from meerax.llm.ollama import OllamaProvider
 from meerax.llm.openai_provider import OpenAIProvider
 
 from src.services.data_service import load_interactions
+from src.services.eval_service import run_full_evaluation
 from src.services.narrative_service import generate_narratives
 from src.services.recommend_service import build_provider, recommend_for_user, set_articles_if_needed
 from src.services.report_service import build_report
@@ -32,6 +33,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--top-k", type=int, default=10)
     parser.add_argument("--llm-provider", choices=list(LLM_PROVIDERS.keys()), default="ollama")
     parser.add_argument("--output", default="reports/news_compass_report.html")
+    parser.add_argument("--eval", action="store_true", help="run full evaluation and include it in the report")
     args = parser.parse_args(argv)
 
     try:
@@ -68,12 +70,15 @@ def main(argv: list[str] | None = None) -> int:
     llm = LLM_PROVIDERS[args.llm_provider]()
     narratives = generate_narratives(recommendations, llm)
 
+    eval_result = run_full_evaluation(data.ratings, provider, k=args.top_k) if args.eval else None
+
     report = build_report(
         "NewsCompass — Recommendation Report",
         recommendations,
         narratives,
         strategy_name=args.strategy,
         user_id=user_id,
+        eval_result=eval_result,
     )
     report.save(args.output)
     print(f"report written to {args.output}")
