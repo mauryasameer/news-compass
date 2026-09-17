@@ -3,6 +3,15 @@
 All notable changes to this project will be documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.2] - 2026-09-17
+
+### Changed
+- `implicit` 0.7.2 → 0.7.3 (upstream bug fixes: nan checks in BPR GPU path, an overflow
+  warning in nearest-neighbors, a memory-access fix). Verified against the real package,
+  not just CI's green check (the shared CI never installs `requirements-als.txt`, so it
+  can't validate this on its own): real ALS unit tests pass, full suite 49/49, and an
+  end-to-end `--strategy als` CLI run against real data succeeds.
+
 ## [0.1.1] - 2026-09-17
 
 ### Fixed
