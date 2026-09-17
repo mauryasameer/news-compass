@@ -5,6 +5,8 @@
 [![Python](https://img.shields.io/badge/python-3.12-3776AB)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-informational)](LICENSE)
 
+![NewsCompass recommendation network](./assets/news-compass-hero.png)
+
 Four pluggable news recommenders (user-based CF, item-based CF, content-based, ALS) plus
 a configurable weighted hybrid, built on [meerax](https://github.com/mauryasameer/the-forge).
 Adds a GenAI narrative layer via `meerax.llm` and renders a self-contained HTML report
