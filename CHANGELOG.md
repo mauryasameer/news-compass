@@ -3,6 +3,11 @@
 All notable changes to this project will be documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.3] - 2026-09-17
+
+### Added
+- Repository hero artwork for the README and social-preview use.
+
 ## [0.1.2] - 2026-09-17
 
 ### Changed
@@ -41,3 +46,5 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - `GOVERNANCE.md` — intended use, explainability boundary, fairness scope (popularity
   bias, cold-start), LLM controls, audit trail, regulatory framing.
 - CI, dependency pins, and initial repo layout.
+
+[0.1.3]: https://github.com/mauryasameer/news-compass/compare/v0.1.2...v0.1.3
