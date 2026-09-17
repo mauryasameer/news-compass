@@ -3,6 +3,14 @@
 All notable changes to this project will be documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.1] - 2026-09-17
+
+### Fixed
+- `scikit-learn`, `gensim`, and `scipy` were unpinned floors (`>=`) in `requirements.txt`
+  — a PROJECT_GUIDELINES violation for anything deployed. Pinned exact to the versions
+  actually tested throughout this build (`scikit-learn==1.9.0`, `gensim==4.4.0`,
+  `scipy==1.18.1`).
+
 ## [0.1.0] - 2026-09-15
 
 ### Added
